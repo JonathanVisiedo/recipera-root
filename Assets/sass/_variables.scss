@@ -1,0 +1,27 @@
+// Grid
+$breakpoints: (
+  's':  679px,
+  'm':  959px,
+  'l':  1199px,
+  'xl': 1599px
+) !default;
+
+$grid-gap: 10px;
+$spacing : .5rem;
+$box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 12px;
+
+// colors
+$light-grey: #f5f5f5;
+$grey: #e0e0e0;
+$grey-black: #616161;
+$black: #111213;
+
+$primary: #d32f2f;
+$secondary: #fb8c00;
+
+$danger: #f44336;
+$warning: #ff9800;
+$success: #4caf50;
+$info: #03a9f4;
+
+$primary-color: #607D8B;

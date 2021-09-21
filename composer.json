@@ -1,0 +1,35 @@
+{
+  "name": "jonathan/bricosk",
+  "description": "BricoSK Website 2020 rework",
+  "require": {
+    "slim/slim": "^4.7",
+    "slim/psr7": "^1.3",
+    "php-di/php-di": "^6.3",
+    "slim/twig-view": "^3.0",
+    "symfony/http-foundation": "^5.2",
+    "monolog/monolog": "^2.2",
+    "middlewares/trailing-slash": "^2.0",
+    "larapack/dd": "1.*",
+    "ext-pdo": "*",
+    "ext-json": "*",
+    "bjeavons/zxcvbn-php": "^1.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ghost\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "Ghost\\Test\\": "tests/"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jonathan Visiedo Gil",
+      "email": "jonathan.visiedo@gmail.com"
+    }
+  ]
+}

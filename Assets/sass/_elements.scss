@@ -1,0 +1,529 @@
+/********************
+/* S| Inputs
+/******************* */
+form {
+	.form__group {
+		margin: .5rem 0;
+		margin: 1rem 0;
+	}
+
+
+	.submit {
+		outline: none;
+		padding: .8rem 2rem;
+
+		background: $primary;
+		color: #fff;
+		border: none;
+		cursor: pointer;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		transition: background .3s;
+
+		&:hover {
+			background: darken($primary, 10%);
+			transition: background .3s;
+		}
+	}
+}
+
+label {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: .25rem;
+}
+
+input[type="text"], input[type="email"], input[type="number"], input[type="phone"], input[type="password"], select, textarea {
+	padding: .5rem .5rem;
+	width: 100%;
+	border: 1px solid $black;
+	outline: none;
+	font-family: "Winston", sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	&:focus {
+		outline: 1px solid $black;
+	}
+}
+input[type='checkbox'] {
+	margin-right: 1rem;
+}
+textarea {
+	resize: vertical;
+}
+input[readonly] {
+	border: none;
+	border-bottom: 1px solid $grey;
+	color: $grey-black;
+	&:focus {
+		outline: none;
+	}
+}
+.checkbox__container {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	&:hover {
+		input {
+			& ~ .checkbox__mark {
+				background-color: $primary;
+			}
+		}
+	}
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+		&:checked {
+			& ~ .checkbox__mark {
+				background-color: $primary;
+				&:after {
+					display: block;
+				}
+			}
+		}
+
+		&.input__error + .checkbox__mark{
+			border-color: $danger;
+		}
+
+	}
+
+	.checkbox__mark {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 25px;
+		width: 25px;
+		border: 1px solid $grey;
+		background-color: #eee;
+
+		&:after {
+			content: "";
+			position: absolute;
+			display: none;
+			left: 9px;
+			top: 5px;
+			width: 5px;
+			height: 10px;
+			border: solid white;
+			border-width: 0 3px 3px 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+	}
+}
+
+.form__group {
+	position: relative;
+	margin: 1rem 0;
+
+
+	.form-control {
+		display: flex;
+		align-items: stretch;
+		justify-content: stretch;
+
+		.after {
+			padding: 0 1.5rem;
+			background: $light-grey;
+			border: 1px solid $grey;
+			line-height: 2.5rem;
+		}
+	}
+
+	.helper {
+		padding: .2rem 0;
+		font-size: 0.8rem;
+		color: $grey-black;
+	}
+
+	.group__display {
+		position: relative;
+		.input__error {
+			border-color: $danger;
+			color: $danger;
+			&:focus {
+				outline-color: $danger;
+			}
+		}
+
+		.input__success {
+			border-color: $success;
+			color: $success;
+			&:focus {
+				outline-color: $success;
+			}
+		}
+
+		& + .helper {
+			&.error {
+				color: $danger;
+			}
+			&.success {
+				color: $success
+			}
+		}
+
+		.display {
+			position: absolute;
+			bottom: .5rem;
+			right: 1rem;
+		}
+	}
+
+}
+
+/********************
+/* S| Modal
+/******************* */
+/* Modal Content/Box */
+.modal {
+	display: none;
+	position: fixed;
+	background-color: #fefefe;
+	margin: auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid $grey;
+	width: 40%; /* Could be more or less, depending on screen size */
+	top: 15%;
+	left: calc(-50vw + 50%);
+	right: calc(-50vw + 50%);
+	z-index: 10000;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+	& + .backdrop {
+		display: none;
+	}
+
+	&.open {
+		display: block;
+
+		& + .backdrop {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, .5);
+			z-index: 1000;
+		}
+	}
+
+	&.modal--small {
+		margin: 0 !important;
+		left: unset;
+		top: unset;
+		right: 1rem;
+		bottom: 1rem;
+		width: 50%;
+		border-color: transparent;
+		background: $grey-black;
+		color: #fff;
+		transform: unset;
+	}
+
+}
+
+@media screen and (max-width: map-get($map: $breakpoints, $key: 'l')) {
+
+	.modal {
+		width: 80%;
+
+	}
+}
+
+
+/********************
+/* S| cards
+/******************* */
+
+.card {
+	position: relative;
+	display: block;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	padding-bottom: 1.5rem;
+
+	.card__new {
+		position: absolute;
+		top: 0;
+		right: -1rem;
+		background: $primary;
+		color: #fff;
+		padding: .2rem .4rem;
+		font-size: 1.1rem;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+	}
+
+	.card__promo {
+		position: absolute;
+		top: 0;
+		right: -1rem;
+		background: $secondary;
+		color: #fff;
+		padding: .2rem .4rem;
+		font-size: 1.1rem;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+	}
+
+	.card__price {
+		position: absolute;
+		top: 2rem;
+		right: -1rem;
+		background: $black;
+		color: #fff;
+		padding: .2rem .4rem;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+	}
+
+	.card__provider {
+		font-family: "poppins-sb", sans-serif;
+		font-weight: 600;
+		font-size: 1.2rem;
+		text-transform: capitalize;
+		color: $primary;
+		text-align: left;
+	}
+
+	.card__title {
+		color: $black;
+		text-align: left;
+	}
+
+	.card__picture {
+		height: 250px;
+		width: 100%;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+}
+
+
+/********************
+/* S| flash
+/******************* */
+
+.alert {
+	position: relative;
+	background: $grey;
+	color: $black;
+	width: 100%;
+	padding: 1rem;
+
+	.close {
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		cursor: pointer;
+	}
+
+	&.alert__danger {
+		background: $danger;
+		color: #fff;
+	}
+
+	&.alert__success {
+		background: $success;
+		color: #fff;
+	}
+	&.alert__warning {
+		background: $warning;
+		color: #fff;
+	}
+	&.alert__info {
+		background: $info;
+		color: #fff;
+	}
+}
+
+/********************
+/* S| button
+/******************* */
+
+.btn {
+	display: inline-block;
+
+	padding: .8rem 2rem;
+	font-size: 1rem;
+	line-height: 1rem;
+	font-weight: 500;
+
+	text-align: center;
+	text-decoration: none;
+
+	outline: none;
+	background: transparent;
+	border: 1px solid transparent;
+
+	word-wrap: normal;
+	cursor: pointer;
+
+	&.btn--small {
+		padding: .5rem;
+	}
+	&.btn__block {
+		width: 100%;
+	}
+
+	&.btn--shadowed {
+		box-shadow: 1px 1px 8px rgba(0,0,0,.4), 0 1px 4px rgba(0,0,0,.4);
+	}
+	&.btn--rounded {
+		border-radius: 100%;
+	}
+
+	&.btn__primary {
+		background: $primary;
+		border-color: $primary;
+		color: #fff;
+		transition: background ease-out .3s;
+		&:hover {
+			background: darken($primary, 10%);
+			transition: background ease-out .3s;
+		}
+	}
+
+	&.btn__primary-link {
+		color: $primary;
+	}
+
+	&.btn__outline-primary {
+		background: #fff;
+		color: $primary;
+		border-color: $primary;
+		&:hover {
+			background: $primary;
+			color: #fff;
+		}
+	}
+
+	&.btn__secondary {
+		background: $secondary;
+		border-color: $secondary;
+		color: #fff;
+	}
+
+	&.btn__secondary-link {
+		color: $secondary;
+	}
+
+	&.btn__outline-secondary {
+		background: #fff;
+		color: $secondary;
+		border-color: $secondary;
+		&:hover {
+			background: $secondary;
+			color: #fff;
+		}
+	}
+
+}
+
+
+/********************
+/* S| table
+/******************* */
+.table {
+	width: 100%;
+	th {
+		font-weight: bold;
+	}
+	td {
+		vertical-align: middle;
+		line-height: 1.2;
+		padding: 1rem;
+
+	}
+
+	&.table__bordered {
+		th {
+			border: 1px solid $grey-black;
+		}
+		td {
+			border: 1px solid $grey-black;
+		}
+	}
+
+	&.table__striped {
+		tr:nth-child(even){
+			background: $light-grey;
+		}
+	}
+}
+
+/********************
+/* S| Nav
+/******************* */
+.nav {
+	display: flex;
+	justify-content: flex-start;
+	.nav__head {
+		display: flex;
+		justify-content: flex-start;
+		.logo {
+			font-size: 2rem;
+			color: #fff;
+			font-weight: 700;
+			font-family: "Cookie", cursive;
+			text-decoration: none;
+		}
+		.action--mobile {
+			display: none;
+		}
+	}
+
+	.nav__bar {
+		width: 100%;
+		.nav__items {
+			width: 100%;
+			display: flex;
+			justify-content: flex-end;
+			.nav__link {
+				padding: 0 2rem;
+				line-height: 41px;
+				color: #fff;
+				text-decoration: none;
+				transition-duration: .3s;
+
+				&:hover {
+					background: darken($primary, 5%);
+					transition-duration: .3s;
+				}
+				&.active {
+					background: darken($primary, 15%);
+				}
+			}
+		}
+	}
+}
+
+// Create form
+
+.ingredients {
+	padding: 1rem;
+	border: 1px solid $black;
+	.ingredient--actions {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+.create__actions {
+	display: flex;
+	justify-content: center;
+}

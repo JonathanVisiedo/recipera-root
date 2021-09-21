@@ -1,0 +1,60 @@
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-white {
+    color: #fff;
+}
+.text-success {
+    color: $success;
+}
+.text-danger {
+    color: $danger;
+}
+.text-warning {
+    color: $warning;
+}
+.text-info {
+    color: $info;
+}
+.text-secondary {
+    color: $grey-black;
+}
+
+.bg-grey {
+    background: $light-grey;
+}
+
+.bg-succes {
+    background: $success;
+}
+.bg-danger {
+    background: $danger;
+}
+
+.text-info {
+    color: $info;
+}
+
+.text-small {
+    font-size: .6rem;
+}
+
+.text-medium {
+    font-size: .8rem;
+}
+
+
+@media screen and (max-width: map-get($map: $breakpoints, $key: 'm')) {
+    .mobile-hidden {
+        display: none;
+    }
+}

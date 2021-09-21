@@ -1,0 +1,25 @@
+#header {
+  padding: 1rem 0;
+  background: $primary;
+
+}
+
+#main {
+  padding: 2rem 0 200px 0;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 2rem 0;
+  background: $primary;
+  color: #fff;
+  font-family: "Cookie", cursive;
+  font-size: 1.2rem;
+}
+
+
+.ckeditor {
+  border: 1px solid $black !important;
+}

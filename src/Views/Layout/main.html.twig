@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Recipera | {% endblock %}</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/master.min.css">
+</head>
+<body>
+
+{% include 'Layout/header.html.twig' %}
+
+<main id="main">
+    {% block body %}{% endblock %}
+</main>
+
+{% include 'Layout/footer.html.twig' %}
+
+
+<!-- Scripts -->
+<script src="https://kit.fontawesome.com/b84771c06b.js" crossorigin="anonymous"></script>
+<script src="/assets/js/ckeditor5/ckeditor.js"></script>
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/isInViewport.min.js"></script>
+<script src="/assets/js/master.min.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

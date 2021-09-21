@@ -1,0 +1,10 @@
+.idea/
+.vscode/
+/coverage/
+/vendor/
+/logs/*
+!/logs/README.md
+.phpunit.result.cache
+resources/tmp/logs/*.log
+node_modules
+package-lock.json

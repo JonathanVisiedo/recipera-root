@@ -1,0 +1,29 @@
+
+<div id="header">
+    <div class="container">
+        <nav class="nav">
+            <div class="nav__head">
+                <a href="{{ url_for('index') }}" class="logo">Recipera</a>
+                <button class="action--mobile"><i class="fa fa-bars fa-2x"></i></button>
+            </div>
+            <div class="nav__bar">
+                <div class="nav__items">
+                    <a href="{{ url_for('index') }}" class="nav__link {{ is_current_url('index') ? 'active' : '' }}"><i class="fa fa-home"></i>&nbsp;Recipes list</a>
+                    <a href="{{ url_for('recipe.create') }}" class="nav__link {{ is_current_url('recipe.create') ? 'active' : '' }}"><i class="fa fa-plus"></i>&nbsp;Add a recipe</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+{% if flash %}
+    {% for key, message in flash %}
+        <div class="alert alert--fixed alert__{{ key }} animate__animated animate__fadeInDown animate__faste">
+            <div class="container-s">
+                <div class="close">&times;</div>
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

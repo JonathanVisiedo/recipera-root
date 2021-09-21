@@ -1,0 +1,78 @@
+{% extends 'Layout/main.html.twig' %}
+
+{% block scripts %}
+    <script>
+        formCreateTools()
+        slugification()
+    </script>
+{% endblock %}
+
+{% block title %}{{ parent() ~ seo_title }}{% endblock %}
+
+{% block body %}
+<div class="container animate__animated animate__backInRight">
+    <h1 class="text-align-center mb4">Create your recipe</h1>
+    <form action="{{ url_for('recipe.create') }}" method="post" enctype="multipart/form-data">
+
+        <div class="form__group">
+            <label for="name">Recipe's name</label>
+            <input type="text" name="name" id="name" placeholder="Enter your recipe name">
+        </div>
+        <div class="form__group">
+            <label for="slug">Recipe's url</label>
+            <input type="text" name="slug" id="slug" class="toSlugify" data-source="#name" readonly>
+        </div>
+
+        <div class="form__group">
+            <div class="bordered p1">
+                <label for="picture">Recipe's picture</label>
+                <input type="file" name="picture" id="picture" >
+            </div>
+        </div>
+
+        <div class="form__group">
+            <label for="description">Recipe's steps</label>
+            <textarea id="description" name="description" class="ckeditor"></textarea>
+        </div>
+
+        <h3>Ingredients</h3>
+
+        <div class="ingredients mb2">
+            <div class="row">
+                <div class="col-l-4">
+                    <div class="form__group">
+                        <label for="i_barcode"><i class="fa fa-barcode"></i>&nbsp;Barcode</label>
+                        <input type="text" name="i_barcode[]" id="i_barcode" placeholder="Enter your barcode">
+                        <div class="helper">
+                            Find your barcode at <a href="https://world.openfoodfacts.org/data" target="_blank">openfoodfacts</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-l-4">
+                    <div class="form__group">
+                        <label for="i_name">Name</label>
+                        <input type="text" name="i_name[]" id="i_name" placeholder="Enter your barcode">
+                    </div>
+                </div>
+                <div class="col-l-3">
+                    <div class="form__group">
+                        <label for="i_quantity">Quantity (mg)</label>
+                        <input type="text" name="i_quantity[]" id="i_quantity" placeholder="Enter your quantity">
+                    </div>
+                </div>
+                <div class="col-l-1 ingredient--actions">
+                    <button class="btn btn__primary btn--rounded btn--small action--addIngredient"><i class="fas fa-plus-circle"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="create__actions">
+            <button type="submit" class="btn btn__primary"><i class="fas fa-save"></i> Save</button>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+{% endblock %}
