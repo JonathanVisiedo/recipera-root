@@ -40,7 +40,7 @@ $settings['error'] = [
 
 $settings['db'] = [
     'driver' => 'mysql',
-    'host' => 'localhost',
+    'host' => 'mysql',
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_general_ci',
     'database' => 'db',

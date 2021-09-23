@@ -4,11 +4,12 @@ networks:
 
 services:
   php:
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile
     container_name: php
-    image: php:7.4-alpine
     working_dir: /var/www
-    command: php -S 0.0.0.0:9000 -t public
+    command: sh -c "composer install && php -S 0.0.0.0:9000 -t public"
     volumes:
       - .:/var/www
     environment:

@@ -93,7 +93,7 @@ const formCreateTools = _ => {
                             </div>
                             <div class="col-l-3">
                                 <div class="form__group">
-                                    <label for="i_quantity">Quantity (mg)</label>
+                                    <label for="i_quantity">Quantity (g)</label>
                                     <input type="text" name="i_quantity[]" id="i_quantity" placeholder="Enter your quantity">
                                 </div>
                             </div>

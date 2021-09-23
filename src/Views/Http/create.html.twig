@@ -12,6 +12,7 @@
 {% block body %}
 <div class="container animate__animated animate__backInRight">
     <h1 class="text-align-center mb4">Create your recipe</h1>
+
     <form action="{{ url_for('recipe.create') }}" method="post" enctype="multipart/form-data">
 
         <div class="form__group">
@@ -26,7 +27,7 @@
         <div class="form__group">
             <div class="bordered p1">
                 <label for="picture">Recipe's picture</label>
-                <input type="file" name="picture" id="picture" >
+                <input type="file" name="picture" id="picture">
             </div>
         </div>
 

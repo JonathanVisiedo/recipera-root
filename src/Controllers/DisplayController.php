@@ -46,11 +46,12 @@ class DisplayController
     public function index (ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface {
 
         return $this->twig->render($response, 'Http/index.html.twig', [
-            'seo_title' => 'Let\'s find something to eat...'
+            'seo_title' => 'Let\'s find something to eat...',
+            'recipes' => $this->recipe->getAll()
         ]);
     }
 
-    public function create(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
+    public function create(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
 
         if($request->getMethod() == 'GET') {
@@ -63,9 +64,7 @@ class DisplayController
         try {
             $post = $request->getParsedBody();
             $files = $request->getUploadedFiles();
-
             $uploaded = false;
-
             $uploaded = $this->filesHandler->uploadImage($files['picture'], 'recipes', (!empty($post['slug']) ? $post['slug'] : null));
             $post['picture'] = $uploaded['file'];
 
