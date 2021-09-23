@@ -79,13 +79,16 @@ const formCreateTools = _ => {
                             <div class="col-l-4">
                                 <div class="form__group">
                                     <label for="i_barcode"><i class="fa fa-barcode"></i>&nbsp;Barcode</label>
-                                    <input type="text" name="i_barcode[]" id="i_barcode" placeholder="Enter your barcode">
+                                    <div class="group__display">
+                                        <input type="text" name="i_barcode[]"  class="datacode" id="i_barcode" placeholder="Enter your barcode">
+                                        <div class="display password__display"><i class="far fa-spin"></i></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-l-4">
                                 <div class="form__group">
                                     <label for="i_name">Name</label>
-                                    <input type="text" name="i_name[]" id="i_name" placeholder="Enter your barcode">
+                                    <input type="text" name="i_name[]" class="dataname" id="i_name" placeholder="Enter your barcode">
                                 </div>
                             </div>
                             <div class="col-l-3">
@@ -95,7 +98,7 @@ const formCreateTools = _ => {
                                 </div>
                             </div>
                             <div class="col-l-1 ingredient--actions">
-                                <button class="btn btn__primary btn--rounded btn--small action--removeIngredient"><i class="fas fa-minus-circle"></i></button>
+                                <button class="btn btn__secondary btn--rounded btn--small action--removeIngredient"><i class="fas fa-minus-circle"></i></button>
                             </div>
                         </div>`
 
@@ -106,6 +109,46 @@ const formCreateTools = _ => {
         e.preventDefault()
         $(this).parents('.row').remove()
     })
+
+    /**
+     * listen when a barcode is entered to GET data from API
+     */
+
+    $(document).on('change', '.datacode', function(e) {
+        e.preventDefault()
+
+        let input = $(this),
+            display = $(this).siblings('.display'),
+            dataname = $(this).parents('.row').find('.dataname'),
+            barcode = $(this).val().trim('');
+
+        input.removeClass('input__error')
+        dataname.attr('readonly', 'readonly')
+        display.removeClass('isHidden')
+
+        $.ajax({
+            url: `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`,
+            success: function(res) {
+                if(res.status === 1) {
+
+                    dataname.val(res.product.product_name)
+                    display.addClass('isHidden')
+                    input.addClass('input__success')
+                    dataname.attr('readonly', false)
+
+                    setTimeout(() => {
+                        input.removeClass('input_success')
+                    }, 1000)
+
+                } else {
+                    input.addClass('input__error')
+                }
+                console.log(res, res.product.product_name)
+            }
+        })
+
+    })
+
 
 }
 const slugification = _ => {

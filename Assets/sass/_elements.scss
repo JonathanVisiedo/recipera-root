@@ -179,6 +179,9 @@ input[readonly] {
 			position: absolute;
 			bottom: .5rem;
 			right: 1rem;
+			&.isHidden {
+				display: none;
+			}
 		}
 	}
 

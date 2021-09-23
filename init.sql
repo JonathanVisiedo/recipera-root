@@ -1,22 +1,23 @@
 # database config
 
-CREATE TABLE recipes
+create table recipes
 (
-    id      INT AUTO_INCREMENT PRIMARY KEY,
-    name    VARCHAR(255),
+    id      int auto_increment primary key,
+    name    varchar(255),
     slug    varchar(255),
-    barcode VARCHAR(255),
-    body    TEXT
-) ENGINE InnoDB
-  CHARSET = utf8mb4;
+    picture varchar(255),
+    body    text
+) engine InnoDB
+  charset = utf8mb4;
 
-CREATE TABLE ingredients
+create table ingredients
 (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id int auto_increment primary key,
     name varchar(255),
+    barcode varchar(255),
     quantity float,
-    recipe_id INT,
-    FOREIGN KEY recipe_key (recipe_id) REFERENCES recipes (id)
-) ENGINE InnoDB
-  CHARSET = utf8mb4;
+    recipe_id int,
+    foreign key recipe_key (recipe_id) references recipes (id)
+) engine InnoDB
+  charset = utf8mb4;
 

@@ -4,6 +4,7 @@ networks:
 
 services:
   php:
+    build: .
     container_name: php
     image: php:7.4-alpine
     working_dir: /var/www

@@ -33,11 +33,7 @@ class FilesHandler
         $extension = '.' . strtolower(pathinfo($file->getClientFilename(),PATHINFO_EXTENSION));
         $check = getimagesize($file->getFilePath());
 
-        $fileDir = dirname(__DIR__).'/../public/assets/images/'.$dest.'/';
-
-        if (ENVIRONMENT === 'PROD' or ENVIRONMENT === 'TEST') {
-            $fileDir = dirname(__DIR__).'/../assets/images/'.$dest.'/';
-        }
+        $fileDir = dirname(__DIR__).'/../public/assets/img/'.$dest.'/';
 
         $destination = $fileDir.$name.$extension;
 
@@ -64,12 +60,7 @@ class FilesHandler
 
     public function deleteImage (string $target): bool {
 
-        $path = dirname(__DIR__). '/../public/assets/images/';
-        
-        if (ENVIRONMENT === 'PROD' or ENVIRONMENT === 'TEST') {
-            $path = dirname(__DIR__). '/../assets/images/';
-        }
-
+        $path = dirname(__DIR__). '/../public/assets/img/';
         if(is_file($path.$target)) return unlink($path.$target);
         
         return false;

@@ -30,11 +30,6 @@
             </div>
         </div>
 
-        <div class="form__group">
-            <label for="description">Recipe's steps</label>
-            <textarea id="description" name="description" class="ckeditor"></textarea>
-        </div>
-
         <h3>Ingredients</h3>
 
         <div class="ingredients mb2">
@@ -42,21 +37,22 @@
                 <div class="col-l-4">
                     <div class="form__group">
                         <label for="i_barcode"><i class="fa fa-barcode"></i>&nbsp;Barcode</label>
-                        <input type="text" name="i_barcode[]" id="i_barcode" placeholder="Enter your barcode">
-                        <div class="helper">
-                            Find your barcode at <a href="https://world.openfoodfacts.org/data" target="_blank">openfoodfacts</a>
+                        <div class="group__display">
+                            <input type="text" name="i_barcode[]"  class="datacode" id="i_barcode" placeholder="Enter your barcode">
+                            <div class="display password__display isHidden animate__animated animate__fadeIn"><i class="fas fa-spinner fa-spin"></i></div>
+                            <div class="helper">Find your barcode at <a href="https://world.openfoodfacts.org/"></a></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-l-4">
                     <div class="form__group">
                         <label for="i_name">Name</label>
-                        <input type="text" name="i_name[]" id="i_name" placeholder="Enter your barcode">
+                        <input type="text" name="i_name[]" class="dataname" id="i_name" placeholder="Enter your barcode">
                     </div>
                 </div>
                 <div class="col-l-3">
                     <div class="form__group">
-                        <label for="i_quantity">Quantity (mg)</label>
+                        <label for="i_quantity">Quantity (g)</label>
                         <input type="text" name="i_quantity[]" id="i_quantity" placeholder="Enter your quantity">
                     </div>
                 </div>
@@ -65,6 +61,12 @@
                 </div>
             </div>
         </div>
+
+        <div class="form__group">
+            <label for="body">Recipe's steps</label>
+            <textarea id="body" name="body" class="ckeditor"></textarea>
+        </div>
+
         <div class="create__actions">
             <button type="submit" class="btn btn__primary"><i class="fas fa-save"></i> Save</button>
         </div>

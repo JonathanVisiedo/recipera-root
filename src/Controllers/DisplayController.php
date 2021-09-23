@@ -5,9 +5,14 @@ namespace Ghost\Controllers;
 
 
 use Ghost\Exception\ValidationException;
+use Ghost\Models\Recipe;
+use Ghost\Services\FilesHandler;
+use Monolog\Logger;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DisplayController
 {
@@ -16,14 +21,26 @@ class DisplayController
      * @var Twig
      */
     private Twig $twig;
+    private Session $session;
+    private FilesHandler $filesHandler;
+    private Recipe $recipe;
+    private Logger $logger;
 
 
     /**
      * DisplayController constructor.
      * @param Twig $twig
+     * @param Session $session
+     * @param Logger $logger
+     * @param FilesHandler $filesHandler
+     * @param Recipe $recipe
      */
-    public function __construct(Twig $twig) {
+    public function __construct(Twig $twig, Session $session, Logger $logger, FilesHandler $filesHandler, Recipe $recipe) {
         $this->twig = $twig;
+        $this->session = $session;
+        $this->filesHandler = $filesHandler;
+        $this->recipe = $recipe;
+        $this->logger = $logger;
     }
 
     public function index (ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface {
@@ -42,14 +59,30 @@ class DisplayController
             ]);
         }
 
-        dd($request->getParsedBody());
 
         try {
+            $post = $request->getParsedBody();
+            $files = $request->getUploadedFiles();
 
+            $uploaded = false;
 
+            $uploaded = $this->filesHandler->uploadImage($files['picture'], 'recipes', (!empty($post['slug']) ? $post['slug'] : null));
+            $post['picture'] = $uploaded['file'];
+
+            $this->recipe->create($post);
+            $this->session->set('flash', ['success' => ['Votre produit a été créé avec succès.']]);
+
+            $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+            return $response->withHeader('Location', $routeParser->UrlFor( 'index'));
 
         } catch (ValidationException $e) {
+            if ($uploaded !== false) $this->filesHandler->deleteImage($uploaded['dest']);
 
+            $this->session->set('flash', ['danger' => $e->getMessage()]);
+            $this->session->set('recovery', $post);
+            $this->logger->error($e->getMessage(), ['type' => 'Recipe::create','code' => $e->getCode(),'data' => $post]);
+
+            return $response->withHeader('Location', $routeParser->UrlFor( 'admin.product.create'));
         }
 
 
