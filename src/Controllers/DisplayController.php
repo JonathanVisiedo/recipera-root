@@ -63,6 +63,7 @@ class DisplayController
             ]);
         }
 
+        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
 
         try {
             $post = $request->getParsedBody();
