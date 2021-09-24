@@ -84,7 +84,7 @@ class DisplayController
             $this->session->set('recovery', $post);
             $this->logger->error($e->getMessage(), ['type' => 'Recipe::create', 'code' => $e->getCode(), 'data' => $post]);
 
-            return $response->withHeader('Location', $routeParser->UrlFor('admin.product.create'));
+            return $response->withHeader('Location', $routeParser->UrlFor('index'));
         }
 
 
