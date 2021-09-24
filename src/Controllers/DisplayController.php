@@ -97,16 +97,12 @@ class DisplayController
         $api = new FoodApiService();
 
 
-
-
         foreach ($recipe['ingredients'] as $key => $ingredient) {
             $data = $api->call($ingredient['barcode']); // nutella : 3017620422003  eau : 3254381025887 beurre: 3451790011245 coca: 5000112546415  jusorange: 3502110009449
-            $recipe['ingredients'][$key]['values'] = $api->getNutriments($data);
+            $recipe['ingredients'][$key]['nutriments'] = $api->getNutriments($data);
         }
 
-
-        // FIXME use a beverage / use a  fat / use a water to see diff on nutriments ...
-
+        $recipe['nutri_table'] = $api->nutri_table($recipe);
 
         return $this->twig->render($response, 'Http/view.html.twig', ['recipe' => $recipe]);
     }

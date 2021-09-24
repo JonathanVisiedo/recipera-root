@@ -1,7 +1,7 @@
 {% extends 'Layout/main.html.twig' %}
 
 
-{% block title %}{{ parent() ~ seo_title }}{% endblock %}
+{% block title %}{{ parent() ~ recipe.name }}{% endblock %}
 
 
 {% block body %}
@@ -15,15 +15,43 @@
     </div>
     <h1>{{ recipe.name }}</h1>
 
-    <div class="ingredients">
-        <h2>Ingredients</h2>
-        {% for ingredient in recipe.ingredients %}
-            <div class="p1">
-                barcode: {{ ingredient.barcode }}<br>
-                name : {{ ingredient.name }}<br>
-                quantity : {{ ingredient.quantity }}
+    <div class="row">
+
+        <div class="col-l-6">
+            <div class="ingredients">
+                <h2>Ingredients</h2>
+                {% for ingredient in recipe.ingredients %}
+                    <div class="p1">
+                        <strong>{{ ingredient.quantity }} g </strong> {{ ingredient.name }}<br>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
+
+        <div class="col-l-6">
+            <table class="table table__bordered table__small table__striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Par 100g</th>
+                    <th>Recette</th>
+                    <th>Daily (%) | Daily (g)</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, nutriment in recipe.nutri_table.recipe %}
+                    {% if  recipe.nutri_table['100g'][key] != 0 %}
+                        <tr>
+                            <td><strong>{{ key }}</strong></td>
+                            <td>{{ recipe.nutri_table['100g'][key]|number_format(2, ',', ' ') }} g</td>
+                            <td>{{ recipe.nutri_table['recipe'][key]|number_format(2, ',', ' ') }} g</td>
+                            <td>{{ (recipe.nutri_table['recipe_daily']['percent'][key] ? recipe.nutri_table['recipe_daily']['percent'][key]|number_format(2, ',', ' ') : '-') }} % | {{ recipe.nutri_table['recipe'][key]|number_format(2, ',', ' ') }} / {{  recipe.nutri_table['recipe_daily']['daily'][key]|number_format(2, ',', ' ') }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="recipe">
         <h2>Recette</h2>
