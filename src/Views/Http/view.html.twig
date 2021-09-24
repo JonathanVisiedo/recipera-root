@@ -35,7 +35,7 @@
                     <th></th>
                     <th>Par 100g</th>
                     <th>Recette</th>
-                    <th>Daily (%) | Daily (g)</th>
+                    <th colspan="2">Journalier (%) | Journalier (g)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,13 @@
                             <td><strong>{{ key }}</strong></td>
                             <td>{{ recipe.nutri_table['100g'][key]|number_format(2, ',', ' ') }} g</td>
                             <td>{{ recipe.nutri_table['recipe'][key]|number_format(2, ',', ' ') }} g</td>
-                            <td>{{ (recipe.nutri_table['recipe_daily']['percent'][key] ? recipe.nutri_table['recipe_daily']['percent'][key]|number_format(2, ',', ' ') : '-') }} % | {{ recipe.nutri_table['recipe'][key]|number_format(2, ',', ' ') }} / {{  recipe.nutri_table['recipe_daily']['daily'][key]|number_format(2, ',', ' ') }}</td>
+                            {% if recipe.nutri_table['recipe_daily']['percent'][key] %}
+                                <td>{{ recipe.nutri_table['recipe_daily']['percent'][key]|number_format(2, ',', ' ') }}</td>
+                                <td>{{ recipe.nutri_table['recipe'][key]|number_format(2, ',', ' ') }} g / {{  recipe.nutri_table['recipe_daily']['daily'][key]|number_format(2, ',', ' ') }} g</td>
+                            {% else %}
+                                <td colspan="2">-</td>
+                            {% endif %}
+
                         </tr>
                     {% endif %}
                 {% endfor %}

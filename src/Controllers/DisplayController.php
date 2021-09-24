@@ -72,7 +72,7 @@ class DisplayController
             $post['picture'] = $uploaded['file'];
 
             $this->recipe->create($post);
-            $this->session->set('flash', ['success' => ['Votre produit a été créé avec succès.']]);
+            $this->session->set('flash', ['success' => 'Votre recette a été créé avec succès.']);
 
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
             return $response->withHeader('Location', $routeParser->UrlFor('index'));
@@ -105,6 +105,21 @@ class DisplayController
         $recipe['nutri_table'] = $api->nutri_table($recipe);
 
         return $this->twig->render($response, 'Http/view.html.twig', ['recipe' => $recipe]);
+    }
+
+    public function delete(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
+    {
+
+        $recipe = $this->recipe->getBySlug($args['slug']);
+        $this->filesHandler->deleteImage($recipe['picture']);
+        $this->recipe->delete($recipe['id']);
+
+        $this->session->set('flash', [
+            'info' => 'Votre recette a été supprimée'
+        ]);
+        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+        return $response->withHeader('Location', $routeParser->UrlFor('index'));
+
     }
 
 

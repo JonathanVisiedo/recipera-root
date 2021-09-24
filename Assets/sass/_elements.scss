@@ -469,9 +469,13 @@ input[readonly] {
 	}
 
 	&.table__small {
+		th {
+			padding: .5rem;
+		}
 		td {
-			line-height: .25rem;
+			line-height: 1;
 			font-size: .8rem;
+			padding: .5rem;
 		}
 	}
 }

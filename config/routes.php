@@ -35,6 +35,7 @@ return function (App $app) {
     // MAIN ROUTES
     $app->group('/', function (Group $app) {
         $app->map(['GET', 'POST'], 'create', DisplayController::class . ':create')->setName('recipe.create');
+        $app->get('delete/{slug:[0-9a-z\-]+}', DisplayController::class . ':delete')->setName('recipe.delete');
         $app->get('{slug:[0-9a-z\-]+}', DisplayController::class . ':view')->setName('recipe.view');
     })->add(ErrorHandlerMiddleware::class);
 

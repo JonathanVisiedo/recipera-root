@@ -11,22 +11,22 @@
 
 {% block body %}
 <div class="container animate__animated animate__backInRight">
-    <h1 class="text-align-center mb4">Create your recipe</h1>
+    <h1 class="text-align-center mb4">Créer une recette</h1>
 
     <form action="{{ url_for('recipe.create') }}" method="post" enctype="multipart/form-data">
 
         <div class="form__group">
-            <label for="name">Recipe's name</label>
+            <label for="name">Nom de la recette</label>
             <input type="text" name="name" id="name" placeholder="Enter your recipe name">
         </div>
         <div class="form__group">
-            <label for="slug">Recipe's url</label>
+            <label for="slug">Url</label>
             <input type="text" name="slug" id="slug" class="toSlugify" data-source="#name" readonly>
         </div>
 
         <div class="form__group">
             <div class="bordered p1">
-                <label for="picture">Recipe's picture</label>
+                <label for="picture">Image</label>
                 <input type="file" name="picture" id="picture">
             </div>
         </div>
@@ -37,24 +37,24 @@
             <div class="row">
                 <div class="col-l-4">
                     <div class="form__group">
-                        <label for="i_barcode"><i class="fa fa-barcode"></i>&nbsp;Barcode</label>
+                        <label for="i_barcode"><i class="fa fa-barcode"></i>&nbsp;Code barre</label>
                         <div class="group__display">
-                            <input type="text" name="i_barcode[]"  class="datacode" id="i_barcode" placeholder="Enter your barcode">
+                            <input type="text" name="i_barcode[]"  class="datacode" id="i_barcode" placeholder="Entrez votre code barre" required>
                             <div class="display password__display isHidden animate__animated animate__fadeIn"><i class="fas fa-spinner fa-spin"></i></div>
-                            <div class="helper">Find your barcode at <a href="https://world.openfoodfacts.org/">https://world.openfoodfacts.org</a></div>
+                            <div class="helper">Trouvez votre code barre sur <a href="https://world.openfoodfacts.org/">https://world.openfoodfacts.org</a></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-l-4">
                     <div class="form__group">
-                        <label for="i_name">Name</label>
-                        <input type="text" name="i_name[]" class="dataname" id="i_name" placeholder="Enter your barcode">
+                        <label for="i_name">Nom de l'ingrédient</label>
+                        <input type="text" name="i_name[]" class="dataname" id="i_name" placeholder="Entrez le nom de votre ingrédient">
                     </div>
                 </div>
                 <div class="col-l-3">
                     <div class="form__group">
-                        <label for="i_quantity">Quantity (g)</label>
-                        <input type="text" name="i_quantity[]" id="i_quantity" placeholder="Enter your quantity">
+                        <label for="i_quantity">Quantité de l'ingrédient (g)</label>
+                        <input type="text" name="i_quantity[]" id="i_quantity" placeholder="Entrez la quantité souhaitée">
                     </div>
                 </div>
                 <div class="col-l-1 ingredient--actions">
@@ -64,12 +64,12 @@
         </div>
 
         <div class="form__group">
-            <label for="body">Recipe's steps</label>
+            <label for="body">Description de la recette</label>
             <textarea id="body" name="body" class="ckeditor"></textarea>
         </div>
 
         <div class="create__actions">
-            <button type="submit" class="btn btn__primary"><i class="fas fa-save"></i> Save</button>
+            <button type="submit" class="btn btn__primary"><i class="fas fa-save"></i> Créer</button>
         </div>
 
     </form>

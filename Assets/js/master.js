@@ -78,23 +78,23 @@ const formCreateTools = _ => {
         let template = `<div class="row">
                             <div class="col-l-4">
                                 <div class="form__group">
-                                    <label for="i_barcode"><i class="fa fa-barcode"></i>&nbsp;Barcode</label>
+                                    <label for="i_barcode"><i class="fa fa-barcode"></i>&nbsp;Code barre</label>
                                     <div class="group__display">
-                                        <input type="text" name="i_barcode[]"  class="datacode" id="i_barcode" placeholder="Enter your barcode">
+                                        <input type="text" name="i_barcode[]"  class="datacode" id="i_barcode" placeholder="Entrez votre code barre" required>
                                         <div class="display password__display"><i class="far fa-spin"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-l-4">
                                 <div class="form__group">
-                                    <label for="i_name">Name</label>
-                                    <input type="text" name="i_name[]" class="dataname" id="i_name" placeholder="Enter your barcode">
+                                    <label for="i_name">Nom de l'ingrédient</label>
+                                    <input type="text" name="i_name[]" class="dataname" id="i_name" placeholder="Entrez le nom de votre ingrédient">
                                 </div>
                             </div>
                             <div class="col-l-3">
                                 <div class="form__group">
-                                    <label for="i_quantity">Quantity (g)</label>
-                                    <input type="text" name="i_quantity[]" id="i_quantity" placeholder="Enter your quantity">
+                                    <label for="i_quantity">Quantité de l'ingrédient (g)</label>
+                                    <input type="text" name="i_quantity[]" id="i_quantity" placeholder="Entrez la quantité souhaitée">
                                 </div>
                             </div>
                             <div class="col-l-1 ingredient--actions">

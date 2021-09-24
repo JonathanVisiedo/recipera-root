@@ -10,19 +10,21 @@ class Recipe
 
     private PDO $pdo;
 
-    public function __construct (PDO $pdo) {
+    public function __construct(PDO $pdo)
+    {
 
         $this->pdo = $pdo;
     }
 
-    public function getAll() {
+    public function getAll()
+    {
 
         $query = $this->pdo->query('select id, name, slug, picture, body from recipes');
         $recipes = $query->fetchAll();
 
         $query = $this->pdo->prepare('select id, name, barcode, quantity, recipe_id from ingredients where recipe_id = :recipe_id');
 
-        for($i=0;$i < count($recipes); $i++) {
+        for ($i = 0; $i < count($recipes); $i++) {
             $query->execute([
                 'recipe_id' => $recipes[$i]['id']
             ]);
@@ -33,7 +35,8 @@ class Recipe
 
     }
 
-    public function getById ($recipe_id) {
+    public function getById($recipe_id)
+    {
         $query = $this->pdo->prepare('select id, name, slug, picture, body from recipes where id = :id');
         $query->execute(['id' => $recipe_id]);
         $recipes = $query->fetch();
@@ -47,7 +50,8 @@ class Recipe
         return $recipes;
     }
 
-    public function getBySlug ($slug) {
+    public function getBySlug($slug)
+    {
         $query = $this->pdo->prepare('select id, name, slug, picture, body from recipes where slug = :slug');
         $query->execute(['slug' => $slug]);
         $recipes = $query->fetch();
@@ -61,7 +65,8 @@ class Recipe
         return $recipes;
     }
 
-    public function create ($data) {
+    public function create($data)
+    {
 
         try {
 
@@ -80,7 +85,7 @@ class Recipe
 
             $query = $this->pdo->prepare('insert into ingredients (barcode, name, quantity, recipe_id) VALUE (:barcode, :name,  :quantity, :recipe_id)');
 
-            for ($i=0; $i<count($data['i_barcode']); $i++) {
+            for ($i = 0; $i < count($data['i_barcode']); $i++) {
                 $query->execute([
                     'barcode' => $data['i_barcode'][$i],
                     'name' => $data['i_name'][$i],
@@ -96,6 +101,19 @@ class Recipe
             throw $e;
         }
 
+    }
+
+    public function delete($id)
+    {
+        $query = $this->pdo->prepare('delete from ingredients where recipe_id = :recipe_id');
+        $query->execute([
+            'recipe_id' => $id
+        ]);
+
+        $query = $this->pdo->prepare('delete from recipes where id = :id');
+        $query->execute([
+            'id' => $id
+        ]);
     }
 
 }
