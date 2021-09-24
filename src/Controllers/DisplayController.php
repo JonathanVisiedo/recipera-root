@@ -7,6 +7,7 @@ namespace Ghost\Controllers;
 use Ghost\Exception\ValidationException;
 use Ghost\Models\Recipe;
 use Ghost\Services\FilesHandler;
+use Ghost\Services\FoodApiService;
 use Monolog\Logger;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -35,7 +36,8 @@ class DisplayController
      * @param FilesHandler $filesHandler
      * @param Recipe $recipe
      */
-    public function __construct(Twig $twig, Session $session, Logger $logger, FilesHandler $filesHandler, Recipe $recipe) {
+    public function __construct(Twig $twig, Session $session, Logger $logger, FilesHandler $filesHandler, Recipe $recipe)
+    {
         $this->twig = $twig;
         $this->session = $session;
         $this->filesHandler = $filesHandler;
@@ -43,7 +45,8 @@ class DisplayController
         $this->logger = $logger;
     }
 
-    public function index (ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface {
+    public function index(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
+    {
 
         return $this->twig->render($response, 'Http/index.html.twig', [
             'seo_title' => 'Let\'s find something to eat...',
@@ -54,7 +57,7 @@ class DisplayController
     public function create(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
 
-        if($request->getMethod() == 'GET') {
+        if ($request->getMethod() == 'GET') {
             return $this->twig->render($response, 'Http/create.html.twig', [
                 'seo_title' => 'Create your recipe'
             ]);
@@ -72,21 +75,41 @@ class DisplayController
             $this->session->set('flash', ['success' => ['Votre produit a été créé avec succès.']]);
 
             $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-            return $response->withHeader('Location', $routeParser->UrlFor( 'index'));
+            return $response->withHeader('Location', $routeParser->UrlFor('index'));
 
         } catch (ValidationException $e) {
             if ($uploaded !== false) $this->filesHandler->deleteImage($uploaded['dest']);
 
             $this->session->set('flash', ['danger' => $e->getMessage()]);
             $this->session->set('recovery', $post);
-            $this->logger->error($e->getMessage(), ['type' => 'Recipe::create','code' => $e->getCode(),'data' => $post]);
+            $this->logger->error($e->getMessage(), ['type' => 'Recipe::create', 'code' => $e->getCode(), 'data' => $post]);
 
-            return $response->withHeader('Location', $routeParser->UrlFor( 'admin.product.create'));
+            return $response->withHeader('Location', $routeParser->UrlFor('admin.product.create'));
         }
 
 
     }
 
+    public function view(ServerRequestInterface $request, ResponseInterface $response, $args): ResponseInterface
+    {
+
+        $recipe = $this->recipe->getBySlug($args['slug']);
+        $api = new FoodApiService();
+
+
+
+
+        foreach ($recipe['ingredients'] as $key => $ingredient) {
+            $data = $api->call($ingredient['barcode']); // nutella : 3017620422003  eau : 3254381025887 beurre: 3451790011245 coca: 5000112546415  jusorange: 3502110009449
+            $recipe['ingredients'][$key]['values'] = $api->getNutriments($data);
+        }
+
+
+        // FIXME use a beverage / use a  fat / use a water to see diff on nutriments ...
+
+
+        return $this->twig->render($response, 'Http/view.html.twig', ['recipe' => $recipe]);
+    }
 
 
 }

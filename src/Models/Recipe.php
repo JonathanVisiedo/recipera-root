@@ -36,15 +36,27 @@ class Recipe
     public function getById ($recipe_id) {
         $query = $this->pdo->prepare('select id, name, slug, picture, body from recipes where id = :id');
         $query->execute(['id' => $recipe_id]);
-        $recipes = $query->fetchAll();
+        $recipes = $query->fetch();
 
         $query = $this->pdo->prepare('select id, name, barcode, quantity, recipe_id from ingredients where recipe_id = :recipe_id');
-        for($i=0;$i < count($recipes); $i++) {
-            $query->execute([
-                'recipe_id' => $recipes[$i]['id']
-            ]);
-            $recipes[$i]['ingredients'] = $query->fetchAll();
-        }
+        $query->execute([
+            'recipe_id' => $recipes['id']
+        ]);
+        $recipes['ingredients'] = $query->fetchAll();
+
+        return $recipes;
+    }
+
+    public function getBySlug ($slug) {
+        $query = $this->pdo->prepare('select id, name, slug, picture, body from recipes where slug = :slug');
+        $query->execute(['slug' => $slug]);
+        $recipes = $query->fetch();
+
+        $query = $this->pdo->prepare('select id, name, barcode, quantity, recipe_id from ingredients where recipe_id = :recipe_id');
+        $query->execute([
+            'recipe_id' => $recipes['id']
+        ]);
+        $recipes['ingredients'] = $query->fetchAll();
 
         return $recipes;
     }
