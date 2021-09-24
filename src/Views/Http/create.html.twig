@@ -10,7 +10,15 @@
 {% block title %}{{ parent() ~ seo_title }}{% endblock %}
 
 {% block body %}
-<div class="container animate__animated animate__backInRight">
+<div class="container animate__animated animate__backInUp">
+    <div class="row">
+        <div class="col-l-12">
+            <div class="image-preview">
+                <img src="/assets/img/cute_illu.png" width="100%" alt="">
+            </div>
+        </div>
+    </div>
+
     <h1 class="text-align-center mb4">Créer une recette</h1>
 
     <form action="{{ url_for('recipe.create') }}" method="post" enctype="multipart/form-data">

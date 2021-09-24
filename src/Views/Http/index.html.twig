@@ -5,24 +5,43 @@
 
 
 {% block body %}
-<div class="container">
+    <div class="container">
 
-<div class="row">
-    {% for recipe in recipes %}
-        <div class="col-l-3">
-            <a href="{{ recipe.slug }}">
-                <div class="card  animate__animated animate__backInLeft">
-                    <div class="card__picture" style="background-image: url('/assets/img/{{ recipe.picture }}'); background-size: cover;">
+        {% if recipes %}
+            <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-l-3">
+                        <a href="{{ recipe.slug }}">
+                            <div class="card  animate__animated animate__backInLeft">
+                                <div class="card__picture"
+                                     style="background-image: url('/assets/img/{{ recipe.picture }}'); background-size: cover;">
+                                </div>
+                                <h3 class="text-align-center mt1">{{ recipe.name }}</h3>
+                                <a href="{{ url_for('recipe.delete',{slug:recipe.slug}) }}"
+                                   class="btn btn__primary-link">Supprimer</a>
+                            </div>
+                        </a>
                     </div>
-                    <h3 class="text-align-center mt1">{{ recipe.name }}</h3>
-                    <a href="{{ url_for('recipe.delete',{slug:recipe.slug}) }}" class="btn btn__primary-link">Supprimer</a>
-                </div>
-            </a>
-        </div>
-    {% endfor %}
-</div>
+                {% endfor %}
+            </div>
 
-</div>
+            {% else %}
+
+            <div class="row">
+                <div class="image-preview">
+                    <img src="/assets/img/cute_illu.png" width="100%" alt="">
+                </div>
+                <div class="col-l-12">
+                    <div class="text-align-center">
+                        <h1>Aucune recette n'a été créée !</h1>
+                        <a href="{{ url_for('recipe.create') }}" class="btn btn__primary"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
 
 
 

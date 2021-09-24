@@ -6,6 +6,32 @@
 
 #main {
   padding: 2rem 0 200px 0;
+  .image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    img {
+      width: 25%;
+    }
+  }
+}
+
+@media screen  and (max-width: 960px){
+  #main {
+    padding: 2rem 0 200px 0;
+    .image-preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      align-self: center;
+      img {
+        width: 60%;
+      }
+    }
+  }
 }
 
 #footer {
