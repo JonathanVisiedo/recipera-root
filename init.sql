@@ -15,7 +15,7 @@ create table ingredients
     id int auto_increment primary key,
     name varchar(255),
     barcode varchar(255),
-    quantity float,
+    quantity double,
     recipe_id int,
     foreign key recipe_key (recipe_id) references recipes (id)
 ) engine InnoDB

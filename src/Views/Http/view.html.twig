@@ -45,7 +45,7 @@
                     <td>{{ recipe.nutri_table['100g']['energy-kcal']|number_format(2, ',', ' ') }} g</td>
                     <td>{{ recipe.nutri_table['recipe']['energy-kcal']|number_format(2, ',', ' ') }} g</td>
                     {% if recipe.nutri_table['recipe_daily']['percent']['energy-kcal'] %}
-                        <td>{{ recipe.nutri_table['recipe_daily']['percent']['energy-kcal']|number_format(2, ',', ' ') }}</td>
+                        <td>{{ recipe.nutri_table['recipe_daily']['percent']['energy-kcal']|number_format(2, ',', ' ') }} %</td>
                         <td>{{ recipe.nutri_table['recipe']['energy-kcal']|number_format(2, ',', ' ') }} g / {{  recipe.nutri_table['recipe_daily']['daily']['energy-kcal']|number_format(2, ',', ' ') }} g</td>
                     {% else %}
                         <td colspan="2">-</td>
@@ -57,7 +57,7 @@
                     <td>{{ recipe.nutri_table['100g']['energy-kj']|number_format(2, ',', ' ') }} g</td>
                     <td>{{ recipe.nutri_table['recipe']['energy-kj']|number_format(2, ',', ' ') }} g</td>
                     {% if recipe.nutri_table['recipe_daily']['percent']['energy-kj'] %}
-                        <td>{{ recipe.nutri_table['recipe_daily']['percent']['energy-kj']|number_format(2, ',', ' ') }}</td>
+                        <td>{{ recipe.nutri_table['recipe_daily']['percent']['energy-kj']|number_format(2, ',', ' ') }} %</td>
                         <td>{{ recipe.nutri_table['recipe']['energy-kj']|number_format(2, ',', ' ') }} g / {{  recipe.nutri_table['recipe_daily']['daily']['energy-kj']|number_format(2, ',', ' ') }} g</td>
                     {% else %}
                         <td colspan="2">-</td>
@@ -71,7 +71,7 @@
                             <td>{{ recipe.nutri_table['100g'][key]|number_format(2, ',', ' ') }} g</td>
                             <td>{{ recipe.nutri_table['recipe'][key]|number_format(2, ',', ' ') }} g</td>
                             {% if recipe.nutri_table['recipe_daily']['percent'][key] %}
-                                <td>{{ recipe.nutri_table['recipe_daily']['percent'][key]|number_format(2, ',', ' ') }}</td>
+                                <td>{{ recipe.nutri_table['recipe_daily']['percent'][key]|number_format(2, ',', ' ') }} %</td>
                                 <td>{{ recipe.nutri_table['recipe'][key]|number_format(2, ',', ' ') }} g / {{  recipe.nutri_table['recipe_daily']['daily'][key]|number_format(2, ',', ' ') }} g</td>
                             {% else %}
                                 <td colspan="2">-</td>

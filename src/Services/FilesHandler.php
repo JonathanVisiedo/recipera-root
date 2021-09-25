@@ -24,7 +24,7 @@ class FilesHandler
         $errors = [];
 
         if(empty($file->getFilePath()))
-            throw new ValidationException('Impossible de valider votre image', ['Veuillez ajouter une image ou votre fichier est trop volumineux.']);
+            throw new ValidationException('Veuillez ajouter une image ou votre fichier est trop volumineux.', ['Veuillez ajouter une image ou votre fichier est trop volumineux.']);
         if(empty($name))
             throw new ValidationException('Impossible de valider votre image', ['Veuillez ajouter un nom à l\'image.']);
 

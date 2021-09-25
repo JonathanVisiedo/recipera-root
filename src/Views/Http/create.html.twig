@@ -25,18 +25,22 @@
 
         <div class="form__group">
             <label for="name">Nom de la recette</label>
-            <input type="text" name="name" id="name" placeholder="Enter your recipe name">
+            <input type="text" name="name" id="name" placeholder="Enter your recipe name" value="{{ recovery.name }}">
         </div>
         <div class="form__group">
             <label for="slug">Url</label>
-            <input type="text" name="slug" id="slug" class="toSlugify" data-source="#name" readonly>
+            <input type="text" name="slug" id="slug" class="toSlugify" data-source="#name" value="{{ recovery.slug }}" readonly>
         </div>
 
         <div class="form__group">
             <div class="bordered p1">
                 <label for="picture">Image</label>
                 <input type="file" name="picture" id="picture">
+                <div class="helper">
+                    Utilisez une image de max 2mo
+                </div>
             </div>
+
         </div>
 
         <h3>Ingredients</h3>

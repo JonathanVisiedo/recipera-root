@@ -20,8 +20,8 @@
 {% if flash %}
     {% for key, message in flash %}
         <div class="alert alert--fixed alert__{{ key }} animate__animated animate__fadeInDown animate__faste">
-            <div class="container-s">
-                <div class="close">&times;</div>
+            <div class="close">&times;</div>
+            <div class="container">
                 {{ message }}
             </div>
         </div>
